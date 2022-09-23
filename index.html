@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Vadata</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logoVadata.png">
+    <script src="mycode.js"></script>
+</head>
+<body>
+   <div class="main">
+
+    <form action="" method="POST" class="form" id="form-1">
+        <h3 class="heading">REGISTER</h3>
+        <p class="decs">Create an account and share with Vadata</p>
+
+        <div class="spacer"></div>
+
+        <div class="form-group">
+            <label class="form-label" for="fullname">Fullname</label>
+            <input type="text" name="fullname" class="form-control" placeholder="VD: Nguyen Duc Tai" id="fullname">
+            <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" name="email" id="email" class="form-control" placeholder="VD: Vadata1011@gmail.com">
+            <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
+            <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="re-password" class="form-label">Password Confirm</label>
+            <input type="password" name="re-password" id="re-password" class="form-control" placeholder="Re-enter password">
+            <span class="form-message"></span>
+        </div>
+
+        <input type="checkbox"> <span class="check-text">Agree to our <a href="#">terms of use</a></span>  
+        <span class="check-btn"></span>
+
+        <button class="form-btn">Register</button>
+    </form>
+   </div>   
+   <script>
+     document.addEventListener('DOMContentLoaded', function () {
+        // Mong muốn của chúng ta
+        Validator({
+          form: '#form-1',
+          formGroupSelector: '.form-group',
+          errorSelector: '.form-message',
+          rules: [
+            Validator.isRequired('#fullname', 'Please enter your fullname!'),
+            Validator.isRequired('#email', 'Please enter your email!'),
+            Validator.isEmail('#email'),
+            Validator.minLength('#password', 6),
+            Validator.isRequired('#re-password'),
+            Validator.isConfirmed('#re-password', function () {
+              return document.querySelector('#form-1 #password').value;
+            }, 'Please enter your password again!')
+          ],
+          onSubmit: function (data) {
+            // Call API
+            console.log(data);
+          }
+        });
+
+
+        Validator({
+          form: '#form-2',
+          formGroupSelector: '.form-group',
+          errorSelector: '.form-message',
+          rules: [
+            Validator.isEmail('#email'),
+            Validator.minLength('#password', 6),
+          ],
+          onSubmit: function (data) {
+            // Call API
+            console.log(data);
+          }
+        });
+      });
+   </script>
+</body>
+</html>
